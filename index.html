@@ -14,7 +14,6 @@
         .emerald-btn:hover { background-color: #047857; }
         .active-btn { background-color: #065f46 !important; color: white !important; }
         
-        /* Toast Notification Styling */
         #toast {
             visibility: hidden; min-width: 200px; background-color: #333; color: #fff; text-align: center;
             border-radius: 50px; padding: 12px; position: fixed; z-index: 1; bottom: 30px; font-size: 14px;
@@ -26,11 +25,9 @@
 </head>
 <body class="py-10 px-4">
 
-    <!-- Toast Notification -->
     <div id="toast">Copied to clipboard!</div>
 
     <div class="max-w-2xl mx-auto premium-card p-8 rounded-[2rem]">
-        <!-- Brand Section - "Pro" removed -->
         <div class="text-center mb-8">
             <h1 class="text-4xl font-extrabold text-emerald-950 tracking-tighter">EmailRefiner</h1>
             <p class="text-emerald-700 mt-2 font-medium">Transform your drafts into professional emails instantly.</p>
@@ -66,13 +63,28 @@
             if(!input) return;
 
             const responses = {
-                "Professional": "Dear Team,\n\nI am writing to formally request leave due to urgent personal commitments. I have ensured all my tasks are current and will resume duties at the earliest opportunity. Thank you for your understanding.\n\nBest Regards,\n[Your Name]",
-                "Friendly": "Hi everyone!\n\nJust wanted to let you know I need to take a few days off for some personal reasons. I've finished up my tasks, so everything should be smooth. Catch you all soon!\n\nBest,\n[Your Name]",
-                "Formal": "To the Management,\n\nThis is to formally notify you of my request for leave of absence effective immediately, due to unforeseen personal obligations. I assure you that all ongoing projects are well-managed. I appreciate your professional consideration.\n\nRespectfully,\n[Your Name]",
-                "Concise": "Team,\n\nRequesting leave for a few days due to personal matters. Work is covered. Will be back shortly.\n\nRegards,\n[Your Name]"
+                "Professional": [
+                    "Dear Team,\n\nI am writing to formally request leave due to urgent personal commitments. I have ensured all my tasks are current. Thank you for your understanding.\n\nBest Regards,\n[Your Name]",
+                    "Dear Team,\n\nI am requesting leave for personal matters. I've updated my status on all pending items to ensure no disruption. I appreciate your support.\n\nBest Regards,\n[Your Name]"
+                ],
+                "Friendly": [
+                    "Hi everyone!\n\nJust wanted to let you know I need to take a few days off for personal reasons. I've finished up my tasks, so everything should be smooth. Catch you soon!\n\nBest,\n[Your Name]",
+                    "Hey team!\n\nI'll be out for a bit for some personal things. Don't worry, all my work is under control. See you when I'm back!\n\nBest,\n[Your Name]"
+                ],
+                "Formal": [
+                    "To the Management,\n\nThis is to formally notify you of my request for leave of absence due to personal obligations. I assure you that all ongoing projects are well-managed.\n\nRespectfully,\n[Your Name]",
+                    "Dear Management,\n\nPlease accept this notification regarding my upcoming leave of absence. All current responsibilities have been handed over appropriately.\n\nRespectfully,\n[Your Name]"
+                ],
+                "Concise": [
+                    "Team,\n\nRequesting leave for a few days. Work is covered. Will be back shortly.\n\nRegards,\n[Your Name]",
+                    "Team,\n\nTaking leave for personal matters. All tasks are up to date. Back soon.\n\nRegards,\n[Your Name]"
+                ]
             };
 
-            document.getElementById('output').innerText = responses[currentTone];
+            const options = responses[currentTone];
+            const randomIndex = Math.floor(Math.random() * options.length);
+            
+            document.getElementById('output').innerText = options[randomIndex];
             document.getElementById('outputArea').classList.remove('hidden');
         }
 
